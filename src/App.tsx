@@ -24,6 +24,8 @@ export default function App() {
             precipitation_unit: "inch",
         }
 
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-expect-error
         Object.keys(params).forEach(key => url.searchParams.append(key, params[key]));
 
         fetch(url.toString()).then(res => {
