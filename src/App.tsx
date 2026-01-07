@@ -131,32 +131,33 @@ export default function App() {
                 <br/>
                 <div className={`flex flex-row gap-2 justify-center ${outdated ? "opacity-60 pointer-events-none" : ""}`}>
                     <button
-                        className={`border-2 border-green-200 ${view == "current" ? "bg-green-300" : ""} rounded-xl p-2 hover:bg-green-600`}
+                        className={`cursor-pointer border-2 border-green-200 ${view == "current" ? "bg-green-300" : ""} rounded-xl p-2 hover:bg-green-600`}
                         onClick={() => setView("current")}
                     >
                         Current
                     </button>
                     <button
-                        className={`border-2 border-green-200 ${view == "forecast" ? "bg-green-300" : ""} rounded-xl p-2 hover:bg-green-600`}
+                        className={`cursor-pointer border-2 border-green-200 ${view == "forecast" ? "bg-green-300" : ""} rounded-xl p-2 hover:bg-green-600`}
                         onClick={() => setView("forecast")}
                     >
                         Forecast
                     </button>
                 </div>
+                <br/>
                 <div
                     className={`bg-neutral-800 rounded-xl p-4 w-[90vw] min-h-[40vh] ${outdated ? "opacity-60" : ""}`}
                 >
                     {
                         loading ?
                             <LoadingComponent/> :
-                            <>
+                            <div className={"flex flex-col justify-center items-center"}>
                                 {
                                     view == "current" && <CurrentWeather data={data}/>
                                 }
                                 {
                                     view == "forecast" && <ForecastWeather data={data}/>
                                 }
-                            </>
+                            </div>
                     }
                 </div>
             </Error>
