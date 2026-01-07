@@ -110,6 +110,7 @@ export default function App() {
                             setLocation({...location, city: e.target.value})
                             setOutdated(true);
                         }}
+                        onKeyDown={(e) => e.key == "Enter" && fetchCity().then()}
                     />
                 </h1>
                 <h2 className={`text-2xl ${outdated ? "opacity-60" : ""}`}>
