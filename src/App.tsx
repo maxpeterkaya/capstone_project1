@@ -12,7 +12,7 @@ export default function App() {
     const [view, setView] = useState<"current" | "forecast">("current");
     const [latitude, setLatitude] = useState(34.7304);
     const [longitude, setLongitude] = useState(-86.5859);
-    const [location, setLocation] = useState<{city: string, state: string}>({city: "Huntsville", state: "Alabama"});
+    const [location, setLocation] = useState<{ city: string, state: string }>({city: "Huntsville", state: "Alabama"});
     const [outdated, setOutdated] = useState(false);
 
     useEffect(() => {
@@ -103,20 +103,27 @@ export default function App() {
         <div className="flex flex-col justify-center items-center gap-4">
             <div>
                 <h1 className={"text-3xl"}>
-                    <input
-                        className={"bg-neutral-600 rounded-lg text-center"}
-                        value={location.city}
-                        onChange={(e) => {
-                            setLocation({...location, city: e.target.value})
-                            setOutdated(true);
-                        }}
-                        onKeyDown={(e) => e.key == "Enter" && fetchCity().then()}
-                    />
+                    Enter a US City below to get the latest weather forecast:
                 </h1>
-                <h2 className={`text-2xl ${outdated ? "opacity-60" : ""}`}>
+                <br/>
+                <input
+                    id={"city"}
+                    className={"bg-neutral-600 rounded-lg text-center text-2xl"}
+                    value={location.city}
+                    onChange={(e) => {
+                        setLocation({...location, city: e.target.value})
+                        setOutdated(true);
+                    }}
+                    onKeyDown={(e) => e.key == "Enter" && fetchCity().then()}
+                />
+
+                <h2 className={`text-xl ${outdated ? "opacity-60" : ""}`}>
                     {location.state}
                 </h2>
             </div>
+            <h4 className={`${outdated ? "" : "text-transparent"}`}>
+                Click the button below or press the 'Enter' key to fetch the latest results!
+            </h4>
             <button
                 onClick={fetchCity}
                 className={`border-2 border-transparent ${outdated ? "opacity-100 bg-green-300" : "opacity-80"} hover:bg-green-300 p-2 rounded-2xl`}
@@ -129,7 +136,8 @@ export default function App() {
                     Longitude: {longitude}
                 </h3>
                 <br/>
-                <div className={`flex flex-row gap-2 justify-center ${outdated ? "opacity-60 pointer-events-none" : ""}`}>
+                <div
+                    className={`flex flex-row gap-2 justify-center ${outdated ? "opacity-60 pointer-events-none" : ""}`}>
                     <button
                         className={`cursor-pointer border-2 border-green-200 ${view == "current" ? "bg-green-300" : ""} rounded-xl p-2 hover:bg-green-600`}
                         onClick={() => setView("current")}
