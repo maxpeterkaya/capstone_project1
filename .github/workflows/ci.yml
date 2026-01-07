@@ -44,8 +44,6 @@ jobs:
       contents: write
       packages: write
 
-    needs: changelog
-
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
