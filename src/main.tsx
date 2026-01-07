@@ -5,7 +5,7 @@ import App from './App.tsx'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-      <div className={"min-w-screen ml-auto mr-auto text-center"}>
+      <div className={"min-w-screen ml-auto mr-auto text-center p-10"}>
           <App />
       </div>
   </StrictMode>,
