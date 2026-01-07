@@ -6,7 +6,7 @@ export default function Error({error, children}: {error: string, children: React
             <h3 className="text-xl font-bold text-red-400">
                 {error}
             </h3>
-            <div className={`cursor-none pointer-events-none ${error.length > 0 ? "opacity-40" : ""}`}>
+            <div className={`${error.length > 0 ? "opacity-40 cursor-none pointer-events-none" : ""}`}>
                 {children}
             </div>
         </>
