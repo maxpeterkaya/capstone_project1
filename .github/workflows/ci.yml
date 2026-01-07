@@ -1,0 +1,76 @@
+name: CI
+on:
+  push:
+    tags:
+      - "*"
+jobs:
+  changelog:
+    if: ${{ !contains(github.ref, '-dev') }}
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+      packages: write
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Update CHANGELOG
+        id: changelog
+        uses: requarks/changelog-action@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          tag: ${{ github.ref_name }}
+          writeToFile: 'false'
+
+      - name: update release
+        id: update_release
+        uses: tubone24/update_release@v1.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          body: ${{ steps.changelog.outputs.changes }}
+          release_name: Release ${{ github.ref_name }}
+          prerelease: false
+
+  docker:
+    if: ${{ !contains(github.ref, '-dev') }}
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+      packages: write
+
+    needs: changelog
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Log in to the Container registry
+        uses: docker/login-action@0d4c9c5ea7693da7b068278f7b52bda2a190a446
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Extract metadata (tags, labels) for Docker
+        id: meta
+        uses: docker/metadata-action@8e5442c4ef9f78752691e2d8f8d19755c6f78e81
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          tags: |
+            type=semver,pattern={{version}},value=${{ github.ref_name }}
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@2cdde995de11925a030ce8070c3d77a52ffcf1c0
+        with:
+          context: .
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
