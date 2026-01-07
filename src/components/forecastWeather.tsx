@@ -8,7 +8,7 @@ export default function ForecastWeather({data}: { data: Forecast }) {
             <div className="h-[70vh] overflow-auto">
                 <table className="min-w-full rounded-lg" role={"table"}>
                     <thead className="text-xl text-green-200 sticky top-0 z-10 divide-y">
-                    <tr className="bg-gray-500 rounded-lg outline-2 outline-b-4 outline-green-200">
+                    <tr className="bg-neutral-500 rounded-lg outline-2 outline-b-4 outline-green-200">
                         <td className={"py-4 rounded-lg"}>
                             Hour
                         </td>
@@ -35,7 +35,7 @@ export default function ForecastWeather({data}: { data: Forecast }) {
                     <tbody>
                     {
                         data.hourly.time.map((v, i) => (
-                            <tr className="even:bg-gray-600 rounded-lgc" key={i}>
+                            <tr className="even:bg-neutral-600 rounded-lgc" key={i}>
                                 <td className={"py-2"}>
                                     {DateTime.fromISO(v).toLocaleString(DateTime.DATETIME_SHORT)}
                                 </td>
