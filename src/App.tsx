@@ -108,7 +108,7 @@ export default function App() {
                 <br/>
                 <input
                     id={"city"}
-                    className={"bg-neutral-600 rounded-lg text-center text-2xl"}
+                    className={"bg-neutral-600 rounded-lg outline-0 border-2 border-green-300 text-center text-2xl hover:border-green-600 focus:border-green-600"}
                     value={location.city}
                     onChange={(e) => {
                         setLocation({...location, city: e.target.value})
@@ -126,7 +126,7 @@ export default function App() {
             </h4>
             <button
                 onClick={fetchCity}
-                className={`border-2 border-transparent ${outdated ? "opacity-100 bg-green-300" : "opacity-80"} hover:bg-green-300 p-2 rounded-2xl`}
+                className={`border-2 border-transparent ${outdated ? "opacity-100 bg-green-300" : "opacity-80"} hover:bg-green-300 p-2 rounded-2xl text-white hover:text-black`}
             >
                 Search
             </button>
