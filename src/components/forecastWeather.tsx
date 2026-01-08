@@ -5,11 +5,11 @@ import {DateTime} from "luxon";
 export default function ForecastWeather({data}: { data: Forecast }) {
     return (
         <div className="overflow-hidden">
-            <div className="h-[70vh] overflow-auto">
-                <table className="min-w-full rounded-lg" role={"table"}>
+            <div className="h-[70vh] w-[70vw] overflow-auto rounded-xl">
+                <table className="min-w-full" role={"table"}>
                     <thead className="text-xl text-green-200 sticky top-0 z-10 divide-y">
-                    <tr className="bg-neutral-500 rounded-lg outline-2 outline-b-4 outline-green-200">
-                        <td className={"py-4 rounded-lg"}>
+                    <tr className="bg-neutral-500">
+                        <td className={"py-4"}>
                             Hour
                         </td>
                         <td>
@@ -35,7 +35,7 @@ export default function ForecastWeather({data}: { data: Forecast }) {
                     <tbody>
                     {
                         data.hourly.time.map((v, i) => (
-                            <tr className="even:bg-neutral-600 rounded-lgc" key={i}>
+                            <tr className="even:bg-neutral-600" key={i}>
                                 <td className={"py-2"}>
                                     {DateTime.fromISO(v).toLocaleString(DateTime.DATETIME_SHORT)}
                                 </td>
