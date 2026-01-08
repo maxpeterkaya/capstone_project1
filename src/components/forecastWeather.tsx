@@ -52,7 +52,7 @@ export default function ForecastWeather({data}: { data: Forecast }) {
                                     {data.hourly.precipitation_probability[i]}%
                                 </td>
                                 <td>
-                                    {LocaleNumber(data.hourly.visibility[i])} ft
+                                    {LocaleNumber(+(data.hourly.visibility[i] / 5280).toFixed(2))} mi
                                 </td>
                                 <td>
                                     {data.hourly.dew_point_2m[i]}&deg;
