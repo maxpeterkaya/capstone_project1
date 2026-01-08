@@ -160,7 +160,7 @@ export default function App() {
                         loading ?
                             <LoadingComponent/> :
                             <div className={"flex flex-col justify-center items-center"}>
-                                <h3>
+                                <h3 className={"text-lg mb-2"}>
                                     Current weather time: {DateTime.fromISO(data.current.time, {zone: "utc"}).toLocal().toLocaleString(DateTime.DATETIME_MED)}
                                 </h3>
                                 {
