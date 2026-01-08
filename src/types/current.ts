@@ -1,7 +1,5 @@
-import {DateTime} from "luxon";
-
 export interface Current {
-    time: DateTime;
+    time: string;
     interval: number;
     temperature_2m: number;
     apparent_temperature: number;
