@@ -4,6 +4,7 @@ import LoadingComponent from "./components/loading.tsx";
 import CurrentWeather from "./components/currentWeather.tsx";
 import ForecastWeather from "./components/forecastWeather.tsx";
 import Error from "./components/error.tsx";
+import {DateTime} from "luxon";
 
 export default function App() {
     const [data, setData] = useState<Forecast>({} as Forecast);
@@ -159,6 +160,9 @@ export default function App() {
                         loading ?
                             <LoadingComponent/> :
                             <div className={"flex flex-col justify-center items-center"}>
+                                <h3>
+                                    Current weather time: {DateTime.fromISO(data.current.time, {zone: "utc"}).toLocal().toLocaleString(DateTime.DATETIME_MED)}
+                                </h3>
                                 {
                                     view == "current" && <CurrentWeather data={data}/>
                                 }
