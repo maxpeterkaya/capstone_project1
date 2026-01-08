@@ -37,7 +37,7 @@ export default function ForecastWeather({data}: { data: Forecast }) {
                         data.hourly.time.map((v, i) => (
                             <tr className="even:bg-neutral-600" key={i}>
                                 <td className={"py-2"}>
-                                    {DateTime.fromISO(v).toLocaleString(DateTime.DATETIME_SHORT)}
+                                    {DateTime.fromISO(v, {zone: "UTC"}).toLocal().toLocaleString(DateTime.DATETIME_SHORT)}
                                 </td>
                                 <td>
                                     {data.hourly.temperature_2m[i]}&deg;
