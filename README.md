@@ -23,3 +23,7 @@ The API that is being utilized is [open-meteo](https://open-meteo.com/).
 Designing the flow of elements and trying to organize everything neatly to look polished. I've usually always had luck
 with setting dark mode through the ``dark`` class with TailwindCSS but it just wouldn't work at all, maybe because this
 time I'm not using a component library.
+
+## Live Demo
+
+A live demo of this project can be viewed at [project1.maxkaya.com](https://project1.maxkaya.com/).
